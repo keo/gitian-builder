@@ -10,11 +10,13 @@ require 'pathname'
 @bitness = {
   'i386' => 32,
   'amd64' => 64,
+  'armhf' => 32
 }
 
 @arches = {
-  'i386' => 'i386',
-  'amd64' => 'x86_64',
+#  'i386' => 'i386',
+#  'amd64' => 'x86_64',
+  'armhf' => 'armhf'
 }
 
 def system!(cmd)

@@ -14,9 +14,9 @@ require 'pathname'
 }
 
 @arches = {
-#  'i386' => 'i386',
-#  'amd64' => 'x86_64',
-  'armhf' => 'armhf'
+  'i386' => 'i386',
+  'amd64' => 'x86_64',
+  'armhf' => 'armv7l'
 }
 
 def system!(cmd)
@@ -75,7 +75,8 @@ def build_one_configuration(suite, arch, build_desc)
   system! "on-target true"
 
   info "Preparing build environment"
-  system! "on-target setarch #{@arches[arch]} bash < target-bin/init-build.sh"
+  info "on-target bash < target-bin/init-build.sh"
+  system! "on-target bash < target-bin/init-build.sh"
 
   build_desc["files"].each do |filename|
     filename = sanitize(filename, "files section")
@@ -144,7 +145,7 @@ def build_one_configuration(suite, arch, build_desc)
   end
 
   info "Running build script (log in var/build.log)"
-  system! "on-target setarch #{@arches[arch]} bash -x < var/build-script > var/build.log 2>&1"
+  system! "on-target bash -x < var/build-script > var/build.log 2>&1"
 end
 
 ################################
